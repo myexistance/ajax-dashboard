@@ -31,15 +31,24 @@ google.charts.setOnLoadCallback(drawDashboard);
 // instantiates a dashboard, a range slider and a pie chart,
 // passes in the data and draws it.
 function drawDashboard() {
-  console.log(grades[0].name , grades[0].Percentage)
+  console.log(grades[0].name , grades[0].Percentage) //arrayToDataTable example
   // Create our data table.
-  var data = google.visualization.arrayToDataTable([
-    ["Name", "Grade Percentage"],
-    [grades[0].name , grades[0].Percentage ],
-    [grades[1].name , grades[1].Percentage],
-    [grades[2].name , grades[2].Percentage],
-    [grades[3].name , grades[3].Percentage]
-  ]);
+  // var data = google.visualization.arrayToDataTable([
+  //   ["Name", "Grade Percentage"],
+  //   [grades[0].name , grades[0].Percentage ],
+  //   [grades[1].name , grades[1].Percentage],
+  //   [grades[2].name , grades[2].Percentage],
+  //   [grades[3].name , grades[3].Percentage]
+  // ]);
+
+  var data = new google.visualization.DataTable(); // for loop example
+      data.addColumn('string','Name');
+      data.addColumn('number','Percentage');
+      for (var i=0; i<grades.length; i++) {
+        data.addRow([grades[i].name, grades[i].Percentage]);
+      }
+
+
 
   // Create a dashboard.
   var dashboard = new google.visualization.Dashboard(
@@ -50,7 +59,7 @@ function drawDashboard() {
     'controlType': 'NumberRangeFilter',
     'containerId': 'filter_div',
     'options': {
-      'filterColumnLabel': 'Grade Percentage'
+      'filterColumnLabel': 'Percentage'
     }
   });
 
